@@ -47,8 +47,6 @@ func GetAllEvents() ([]Event, error) {
 	}
 	defer rows.Close()
 
-	var events []Event
-
 	for rows.Next() { // Next returns bool as true as long as there is rows left
 		var event Event
 		err := rows.Scan(&event.ID, &event.Name, &event.Description, &event.Location, &event.DateTime, &event.UserID)

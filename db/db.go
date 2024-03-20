@@ -8,8 +8,9 @@ import (
 var DB *sql.DB
 
 func init() {
+	var err error 
 	// keep the function name init when initialising a database so that go understands that this function is the entry point to initialise a database and the function would not need to be called anywhere this way
-	DB, err := sql.Open("sqlite3", "api.db") // sql is a built-in go package that lets us communicate with our database. Open takes 2 arguments, the database we want to use and the name of the local file containing our database
+	DB, err = sql.Open("sqlite3", "api.db") // sql is a built-in go package that lets us communicate with our database. Open takes 2 arguments, the database we want to use and the name of the local file containing our database
 	if err != nil {
 		panic("could not connect to database")
 	}
@@ -34,6 +35,6 @@ func createTables() {
 
 	_, err := DB.Exec(createEventsTable)
 	if err != nil {
-		panic("could not create events table")
+		panic(err)
 	}
 }
